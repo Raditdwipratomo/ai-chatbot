@@ -8,9 +8,13 @@ def get_llm(provider, model):
         if not GROQ_API_KEY:
             raise ValueError("GROQ_API_KEY NOT FOUND")
         return ChatGroq(model=model, api_key=GROQ_API_KEY)
-    elif provider == "OpenAI":
+    elif provider == "Deepseek":
         if not OPENAI_API_KEY:
             raise ValueError("NOT FOUND")
-        return ChatOpenAI(model=model, api_key=OPENAI_API_KEY)
+        return ChatOpenAI(
+    model="deepseek/deepseek-r1-0528:free",
+    openai_api_key= OPENAI_API_KEY,
+    openai_api_base="https://openrouter.ai/api/v1"
+)
     else:
         raise ValueError(f"Unknown provider: {provider}")

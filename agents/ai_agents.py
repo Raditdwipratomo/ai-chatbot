@@ -11,7 +11,7 @@ def get_response_from_ai_agent(llm_id, query, allow_search, system_prompt, provi
 
     # To build conversation history
     state = {
-        "message": [
+        "messages": [
             SystemMessage(content=system_prompt),
             HumanMessage(content=query[-1])
         ]
@@ -19,6 +19,6 @@ def get_response_from_ai_agent(llm_id, query, allow_search, system_prompt, provi
 
     response = agent.invoke(state)
     messages = response.get("messages", [])
-    ai_message = [msg.content for msg in messages if isinstance(msg.AIMessage)]
+    ai_message = [msg.content for msg in messages if isinstance(msg,AIMessage)]
     return ai_message[-1] if ai_message else "No Response"
 

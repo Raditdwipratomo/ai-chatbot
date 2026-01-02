@@ -12,5 +12,6 @@ def chat_endpoint(request: RequestState):
         return {"error": "Invalid model name"}
     
     response = get_response_from_ai_agent(llm_id=request.model_name, query=request.messages, allow_search=request.allow_search, system_prompt=request.system_prompt, provider=request.model_provider)
+    print("request: ", request.messages)
 
     return response 
